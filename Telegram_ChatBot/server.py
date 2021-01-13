@@ -1,16 +1,21 @@
-  
 from bot import telegram_bot
+import Scrap
 
 bot = telegram_bot("config.cfg")
-
 
 def make_reply(msg,f_name):
     reply = None
     if msg == "":
-        reply =  "Hello {}".format(f_name)
+        reply =  "Hello {}, Welcome to My Telegram Bot. Enter -- /help -- for help".format(f_name)
+    elif msg == "/help":
+        reply = "I can help you please enter the tradecompany's symbol ex: ebl for Everest Bank limited  \n "
+    else:
+        reply=Scrap.StockPrice(msg)
     return reply
 
 update_id = None
+fl = True
+pName = {""}
 while True:
     updates = bot.get_updates(offset=update_id)
     updates = updates["result"]
@@ -22,8 +27,12 @@ while True:
                 f_name=str(item["message"]["from"]["first_name"])
             except:
                 message = None
-                f_name = None
+                f_name=None
             from_ = item["message"]["from"]["id"]
-    else:
-        reply = make_reply(message)
-        bot.send_message(reply, from_)
+            if(pName == "" or f_name not in pName):
+                reply = make_reply("",f_name)
+                bot.send_message(reply,from_)
+                pName.add(f_name)
+            else:
+                reply = make_reply(message,f_name)
+                bot.send_message(reply,from_)
