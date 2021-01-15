@@ -1,5 +1,5 @@
-flask 
-beautifulsoup4
+flask
 pandas 
 requests 
+beautifulsoup4
 gunicorn
