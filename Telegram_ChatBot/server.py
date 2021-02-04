@@ -4,7 +4,7 @@ import Scrap
 bot = telegram_bot("config.cfg")
 
 def make_reply(msg,f_name):
-    reply = None
+    reply= None
     if msg == "":
         reply =  "Hello {}, Welcome to My Telegram Bot. Enter -- /help -- for help".format(f_name)
     elif msg == "/help":
