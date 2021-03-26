@@ -40,5 +40,5 @@ def StockPrice(username):
         for _ in final:
             fl += _+"\n"
     else:
-        fl = "Please enter a valid user"
+        fl = "Please enter a valid username"
     return fl
